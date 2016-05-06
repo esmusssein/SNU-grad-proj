@@ -1,0 +1,39 @@
+app:
+  build: .
+  ports:
+    - "1883:1883"
+  environment:
+    - REDIS_HOST=redis
+    - ZK_URI=zookeeper:2181
+  links:
+    - redis
+    - zookeeper
+
+redis:
+  image: redis:3.0.6
+  ports:
+    - "6379:6379"
+
+zookeeper:
+  image: wurstmeister/zookeeper
+  container_name: zookeeper
+  ports:
+    - "2181:2181"
+    - "22"
+
+kafka:
+  image: jeado/kafka:0.9.0.0
+  ports:
+    - "9092:9092"
+  links:
+    - zookeeper:zk
+  environment:
+    - KAFKA_ADVERTISED_HOST_NAME=192.168.99.100
+    - KAFKA_CREATE_TOPICS=vehicle:3:1
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+
+redis:
+  image: redis:3.0.6
+  ports:
+    - "6379:6379"

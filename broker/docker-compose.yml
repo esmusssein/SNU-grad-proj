@@ -1,13 +1,13 @@
-app:
-  build: .
-  ports:
-    - "1883:1883"
-  environment:
-    - REDIS_HOST=redis
-    - ZK_URI=zookeeper:2181
-  links:
-    - redis
-    - zookeeper
+#app:
+#  build: .
+#  ports:
+#    - "1883:1883"
+#  environment:
+#    - REDIS_HOST=redis
+#    - ZK_URI=zookeeper:2181
+#  links:
+#    - redis
+#    - zookeeper
 
 redis:
   image: redis:3.0.6

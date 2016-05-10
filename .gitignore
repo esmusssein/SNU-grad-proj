@@ -1,2 +1,18 @@
 .idea
+
 broker/node_modules
+
+# scala specific
+*.class
+*.log
+
+# sbt specific
+spark-app/.cache
+spark-app/.history
+spark-app/.lib/
+spark-app/dist/*
+spark-app/target/
+spark-app/lib_managed/
+spark-app/src_managed/
+spark-app/project/boot/
+spark-app/project/plugins/project/

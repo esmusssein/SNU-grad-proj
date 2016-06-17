@@ -14,7 +14,7 @@ class VehicleMessageSpec extends FlatSpec {
 
   it should "get JSON string and return the data structure" in {
     val json = "{\"vehicleId\":\"foo\",\"timestamp\":\"2016-05-07T21:33:34.467+09:00\",\"longitude\":37.4812,\"latitude\":126.948004}"
-    assert(Parse.decodeOption[VehicleMessage](json) contains
-      VehicleMessage("foo", new DateTime("2016-05-07T12:33:34.467Z"), 37.4812, 126.948004))
+    assert(Parse.decodeOption[VehicleMessage](json) ==
+      Some(VehicleMessage("foo", new DateTime("2016-05-07T12:33:34.467Z"), 37.4812, 126.948004)))
   }
 }

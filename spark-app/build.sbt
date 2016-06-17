@@ -1,8 +1,11 @@
+import _root_.sbtassembly.AssemblyPlugin.autoImport._
+import _root_.sbtassembly.PathList
+
 lazy val root = (project in file(".")).
   settings(
     name := "spark-app",
     version := "0.1",
-    scalaVersion := "2.11.8",
+    scalaVersion := "2.10.6",
     mainClass in Compile := Some("App")
   )
 
@@ -16,8 +19,10 @@ libraryDependencies += "io.argonaut" %% "argonaut" % "6.1"
 
 // META-INF discarding
 mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
-   {
-    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-    case x => MergeStrategy.first
-   }
+{
+  case PathList("META-INF", xs @ _*) => MergeStrategy.discard
+  case PathList("reference.conf") => MergeStrategy.concat
+  case x => MergeStrategy.first
 }
+}
+

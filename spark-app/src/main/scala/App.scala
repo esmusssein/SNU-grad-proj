@@ -18,7 +18,7 @@ object App extends App {
     .flatMap { case (_, v) => Parse.decodeOption[List[VehicleMessage]](v) }
     .flatMap { as => for (v1 <- as.lift(0); v2 <- as.lift(1)) yield (v1, v2) }
     .map { case (v1, v2) => velocity(v1, v2) }
-  velocities.print()
+  velocities.foreachRDD(rdd => rdd.foreach(tup => println(tup)))
 
   ssc.start()
   ssc.awaitTermination()
